@@ -4,6 +4,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -11,47 +12,52 @@ body {
 
 .container {
     text-align: center;
-    padding: 20px;
+    padding: 30px;
     background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    width: 300px;
 }
 
 h1 {
     color: #333;
-    margin-bottom: 20px;
+    margin: 0 0 20px 0;
+    font-size: 24px;
 }
 
 #songTitle {
-    font-size: 28px;
-    padding: 10px 20px;
-    margin: 10px 0;
-    border-radius: 25px;
+    font-size: 32px;
+    padding: 15px 25px;
+    margin-bottom: 20px;
     font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
 }
 
 #direction {
-    font-size: 24px;
-    color: #666;
-    padding: 15px;
-    background-color: #f8f8f8;
-    border-radius: 5px;
-    margin: 10px 0;
+    font-size: 20px;
+    color: #fff;
+    padding: 12px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
 }
 
 #playButton {
-    padding: 12px 30px;
+    padding: 15px 40px;
     border: none;
-    border-radius: 25px;
-    font-size: 18px;
+    border-radius: 30px;
+    font-size: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 #playButton:hover {
-    transform: scale(1.05);
-    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
