@@ -5,7 +5,6 @@ const backwardSound = document.getElementById('backwardSound');
 const directionDisplay = document.getElementById('direction');
 const songTitle = document.getElementById('songTitle');
 const playButton = document.getElementById('playButton');
-const container = document.querySelector('.container');
 
 let lastDirection = 'none';
 let currentAudio = null;
@@ -44,7 +43,7 @@ function updateDisplay(direction) {
             applyVerticalStyle();
             break;
         case 'left':
-            songTitle.textContent = 'Rivers';
+            songTitle.textContent = 'Rivers In the Desert';
             currentAudio = leftSound;
             applyHorizontalStyle();
             break;
@@ -61,7 +60,6 @@ function updateDisplay(direction) {
         default:
             songTitle.textContent = '';
             playButton.style.display = 'none';
-            container.style.background = 'white';
             currentAudio = null;
             return;
     }
@@ -70,17 +68,17 @@ function updateDisplay(direction) {
 }
 
 function applyHorizontalStyle() {
-    container.style.background = 'linear-gradient(135deg, #ff0000, #cc0000)';
+    songTitle.style.backgroundColor = '#ff0000';
     songTitle.style.color = '#ffffff';
-    playButton.style.background = 'linear-gradient(135deg, #ff0000, #cc0000)';
+    playButton.style.backgroundColor = '#ff0000';
     playButton.style.color = '#ffffff';
 }
 
 function applyVerticalStyle() {
-    container.style.background = 'linear-gradient(135deg, #0000ff, #0000cc)';
-    songTitle.style.color = '#ff0000';
-    playButton.style.background = 'linear-gradient(135deg, #0000ff, #0000cc)';
-    playButton.style.color = '#ff0000';
+    songTitle.style.backgroundColor = '#0390fc';
+    songTitle.style.color = '#fce703';
+    playButton.style.backgroundColor = '#0390fc';
+    playButton.style.color = '#fce703';
 }
 
 function stopAllSounds() {
