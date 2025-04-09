@@ -4,8 +4,6 @@ const rightSound = document.getElementById('rightSound');
 const backwardSound = document.getElementById('backwardSound');
 const directionDisplay = document.getElementById('direction');
 
-let lastDirection = 'none';
-
 function handleOrientation(event) {
     const beta = event.beta;
     const gamma = event.gamma;
@@ -23,38 +21,34 @@ function handleOrientation(event) {
         currentDirection = 'left';
     }
 
-    if (currentDirection !== lastDirection) {
-        stopAllSounds();
-        directionDisplay.textContent = getDirectionText(currentDirection);
-        
-        switch (currentDirection) {
-            case 'forward':
-                forwardSound.play();
-                break;
-            case 'left':
-                leftSound.play();
-                break;
-            case 'right':
-                rightSound.play();
-                break;
-            case 'backward':
-                backwardSound.play();
-                break;
-        }
-        
-        lastDirection = currentDirection;
+    stopAllSounds();
+    directionDisplay.textContent = getDirectionText(currentDirection);
+    
+    switch (currentDirection) {
+        case 'forward':
+            if (forwardSound.ended) forwardSound.currentTime = 0;
+            forwardSound.play();
+            break;
+        case 'left':
+            if (leftSound.ended) leftSound.currentTime = 0;
+            leftSound.play();
+            break;
+        case 'right':
+            if (rightSound.ended) rightSound.currentTime = 0;
+            rightSound.play();
+            break;
+        case 'backward':
+            if (backwardSound.ended) backwardSound.currentTime = 0;
+            backwardSound.play();
+            break;
     }
 }
 
 function stopAllSounds() {
     forwardSound.pause();
-    forwardSound.currentTime = 0;
     leftSound.pause();
-    leftSound.currentTime = 0;
     rightSound.pause();
-    rightSound.currentTime = 0;
     backwardSound.pause();
-    backwardSound.currentTime = 0;
 }
 
 function getDirectionText(direction) {
