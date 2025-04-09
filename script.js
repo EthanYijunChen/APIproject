@@ -3,6 +3,11 @@ const leftSound = document.getElementById('leftSound');
 const rightSound = document.getElementById('rightSound');
 const backwardSound = document.getElementById('backwardSound');
 const directionDisplay = document.getElementById('direction');
+const songTitle = document.getElementById('songTitle');
+const playButton = document.getElementById('playButton');
+
+let lastDirection = 'none';
+let currentAudio = null;
 
 function handleOrientation(event) {
     const beta = event.beta;
@@ -21,27 +26,59 @@ function handleOrientation(event) {
         currentDirection = 'left';
     }
 
-    stopAllSounds();
-    directionDisplay.textContent = getDirectionText(currentDirection);
+    if (currentDirection !== lastDirection) {
+        stopAllSounds();
+        updateDisplay(currentDirection);
+        lastDirection = currentDirection;
+    }
+}
+
+function updateDisplay(direction) {
+    directionDisplay.textContent = getDirectionText(direction);
     
-    switch (currentDirection) {
+    switch (direction) {
         case 'forward':
-            if (forwardSound.ended) forwardSound.currentTime = 0;
-            forwardSound.play();
+            songTitle.textContent = 'Mass Destruction';
+            currentAudio = forwardSound;
+            applyVerticalStyle();
             break;
         case 'left':
-            if (leftSound.ended) leftSound.currentTime = 0;
-            leftSound.play();
+            songTitle.textContent = 'Rivers';
+            currentAudio = leftSound;
+            applyHorizontalStyle();
             break;
         case 'right':
-            if (rightSound.ended) rightSound.currentTime = 0;
-            rightSound.play();
+            songTitle.textContent = 'Last Surprise';
+            currentAudio = rightSound;
+            applyHorizontalStyle();
             break;
         case 'backward':
-            if (backwardSound.ended) backwardSound.currentTime = 0;
-            backwardSound.play();
+            songTitle.textContent = 'Color Your Night';
+            currentAudio = backwardSound;
+            applyVerticalStyle();
             break;
+        default:
+            songTitle.textContent = '';
+            playButton.style.display = 'none';
+            currentAudio = null;
+            return;
     }
+    
+    playButton.style.display = 'block';
+}
+
+function applyHorizontalStyle() {
+    songTitle.style.backgroundColor = '#ff0000';
+    songTitle.style.color = '#ffffff';
+    playButton.style.backgroundColor = '#ff0000';
+    playButton.style.color = '#ffffff';
+}
+
+function applyVerticalStyle() {
+    songTitle.style.backgroundColor = '#0000ff';
+    songTitle.style.color = '#ff0000';
+    playButton.style.backgroundColor = '#0000ff';
+    playButton.style.color = '#ff0000';
 }
 
 function stopAllSounds() {
@@ -60,6 +97,15 @@ function getDirectionText(direction) {
         default: return 'Hold flat';
     }
 }
+
+playButton.addEventListener('click', () => {
+    if (currentAudio) {
+        if (currentAudio.ended) {
+            currentAudio.currentTime = 0;
+        }
+        currentAudio.play();
+    }
+});
 
 if (window.DeviceOrientationEvent) {
     window.addEventListener('deviceorientation', handleOrientation);
